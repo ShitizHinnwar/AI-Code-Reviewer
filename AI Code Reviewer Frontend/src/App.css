@@ -1,0 +1,172 @@
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+main {
+  height: 100vh;
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+main .left,
+main .right {
+  height: 100%;
+  flex-basis: 60%;
+  border-radius: 0.7rem;
+}
+
+main .left {
+  background-color: #000000;
+  position: relative;
+}
+
+.left .code,
+.code pre,
+.code pre code {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  border-radius: 0.7rem;
+  background-color: #0c0c0c;
+}
+
+main .left .review {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: rgb(219, 219, 255);
+  color: #000000;
+  padding: 0.5rem 2rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 0.7rem;
+}
+
+.right {
+  width: 50%;
+  background: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* 👈 center content */
+  padding: 20px;
+}
+
+
+main .right {
+  background-color: #343434;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  overflow: auto;
+}
+
+.review {
+  margin-top: 10px;
+  background: #4CAF50;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 15px;
+  height: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  max-width: 650px;
+  width: 100%;
+}
+
+.user {
+  align-self: flex-end;
+  background: #2563eb;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 12px;
+  max-width: 60%;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ai {
+  align-self: flex-start;
+  background: #2f2f2f;
+  color: #eaeaea;
+  padding: 10px 14px;
+  border-radius: 10px;
+  max-width: 85%;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ai p {
+  margin: 8px 0;
+}
+
+.ai h1, .ai h2, .ai h3 {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.ai code {
+  font-size: 13px;
+}
+
+.ai ul {
+  padding-left: 18px;
+  margin: 8px 0;
+}
+
+.ai li {
+  margin-bottom: 6px;
+}
+
+.ai pre {
+  background: #1e1e1e;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.code-block {
+  position: relative;
+  margin-top: 8px;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #444;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.copy-btn:hover {
+  opacity: 1;
+  background: #666;
+}
