@@ -17,32 +17,44 @@ public class AIService {
 
     public String reviewCode(String code) {
 
-        RestTemplate restTemplate = new RestTemplate();
+        try {
+            RestTemplate restTemplate = new RestTemplate();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
-        String prompt = "Review the following code and suggest improvements:\n" + code;
+            String safeCode = code.replace("\"", "\\\"");
 
-        String body = "{ \"contents\": [{\"parts\":[{\"text\":\"" + prompt + "\"}]}]}";
+            String prompt = "Review the following code and suggest improvements:\n" + safeCode;
 
-        HttpEntity<String> request = new HttpEntity<>(body, headers);
+            String body = "{ \"contents\": [{\"parts\":[{\"text\":\"" + prompt + "\"}]}]}";
 
-        String url = apiUrl + "?key=" + apiKey;
+            HttpEntity<String> request = new HttpEntity<>(body, headers);
 
-        ResponseEntity<String> response =
-                restTemplate.postForEntity(url, request, String.class);
+            String url = apiUrl + "?key=" + apiKey;
 
-        JSONObject json = new JSONObject(response.getBody());
+            ResponseEntity<String> response =
+                    restTemplate.postForEntity(url, request, String.class);
 
-        String result = json
-                .getJSONArray("candidates")
-                .getJSONObject(0)
-                .getJSONObject("content")
-                .getJSONArray("parts")
-                .getJSONObject(0)
-                .getString("text");
+            String responseBody = response.getBody();
 
-        return result;
+            // 🔥 SAFETY CHECK
+            if (responseBody == null || !responseBody.trim().startsWith("{")) {
+                return "Invalid API response (not JSON): " + responseBody;
+            }
+
+            JSONObject json = new JSONObject(responseBody);
+
+            return json
+                    .getJSONArray("candidates")
+                    .getJSONObject(0)
+                    .getJSONObject("content")
+                    .getJSONArray("parts")
+                    .getJSONObject(0)
+                    .getString("text");
+
+        } catch (Exception e) {
+            return "Error: " + e.getMessage();
+        }
     }
 }
