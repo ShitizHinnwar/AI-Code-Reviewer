@@ -42,14 +42,15 @@ function App() {
     setMessages(prev => [...prev, userMessage]);
 
     try {
-      const response = await axios.post('http://localhost:9090/api/review', {
+      const response = await axios.post("https://ai-code-reviewer-1-xq6n.onrender.com/api/review", {
         code
       });
 
       const aiMessage = { role: "ai", content: "" };
       setMessages(prev => [...prev, aiMessage]);
 
-      typeEffect(response.data.review); // 🔥 typing effect
+      typeEffect(response.data.review);
+      console.log(response.data.review);
 
     } catch (error) {
       console.error(error);
